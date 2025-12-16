@@ -68,7 +68,13 @@
         <v-row>
           <v-col cols="8">
             <ul class="d-flex text-white">
-              <li>one</li>
+              <li v-for="category in categories" :key="category.title">
+                <router-link
+                  :to="{ name: 'home' }"
+                  style="color: white; text-decoration: none"
+                  >{{ category.title }}</router-link
+                >
+              </li>
             </ul>
           </v-col>
           <v-col cols="4" class="d-flex justify-end" style="gap: 25px">
@@ -105,6 +111,8 @@
   </div>
 </template>
 <script>
+import { productsModule } from "@/stores/products";
+import { mapState } from "pinia";
 export default {
   inject: ["Emitter"],
   data() {
@@ -120,6 +128,9 @@ export default {
     openCart() {
       this.Emitter.emit("openCart");
     },
+  },
+  computed: {
+    ...mapState(productsModule, ["categories"]),
   },
 };
 </script>

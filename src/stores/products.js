@@ -4,6 +4,15 @@ import axios from "axios";
 export const productsModule = defineStore("productsModule", {
   state: () => ({
     flashDeals: [],
+    categories: [
+      { title: "Smartphones", route: "smartphones" },
+      { title: "Laptops", route: "laptops" },
+      { title: "Motorcycle", route: "motorcycle" },
+      { title: "Fragrances", route: "fragrances" },
+      { title: "Sunglasses", route: "sunglasses" },
+      { title: "Automotive", route: "automotive" },
+      { title: "Tops", route: "tops" },
+    ],
   }),
   actions: {
     async getProducts() {

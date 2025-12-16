@@ -12,13 +12,10 @@
             <ul class="d-flex text-white">
               <li v-for="category in categories" :key="category.title">
                 <router-link
-                  :to="{
-                    name: 'products_category',
-                    params: { category: category.route, title: category.title },
-                  }"
+                  :to="{ name: 'home' }"
+                  style="color: white; text-decoration: none"
+                  >{{ category.title }}</router-link
                 >
-                  {{ category.title }}
-                </router-link>
               </li>
             </ul>
           </v-col>
@@ -51,12 +48,17 @@
   </div>
 </template>
 <script>
+import { productsModule } from "@/stores/products";
+import { mapState } from "pinia";
 export default {
   inject: ["Emitter"],
   methods: {
     openCart() {
       this.Emitter.emit("openCart");
     },
+  },
+  computed: {
+    ...mapState(productsModule, ["categories"]),
   },
 };
 </script>
