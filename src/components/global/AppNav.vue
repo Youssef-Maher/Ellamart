@@ -70,7 +70,10 @@
             <ul class="d-flex text-white">
               <li v-for="category in categories" :key="category.title">
                 <router-link
-                  :to="{ name: 'home' }"
+                  :to="{
+                    name: 'products_category',
+                    params: { category: category.route, title: category.title },
+                  }"
                   style="color: white; text-decoration: none"
                   >{{ category.title }}</router-link
                 >

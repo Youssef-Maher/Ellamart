@@ -1,5 +1,5 @@
 <template v-if="categoryProducts.products">
-  <div class="products-categoty py-16 px-10">
+  <div class="products-swiper py-16 px-10">
     <div class="title mb-10 d-flex justify-space-between align-center">
       <h2>{{ $route.params.title }}</h2>
       <a href="#">Shop All</a>
@@ -60,9 +60,8 @@
           </v-btn-toggle>
           <div>
             <v-btn
-              density="compact"
               style="text-transform: none; border-radius: 30px"
-              class="my-3 py-2 px-12"
+              class="my-3"
               variant="outlined"
               >Choose Options</v-btn
             >
@@ -102,18 +101,18 @@ export default {
 };
 </script>
 <style>
-.products-categoty .title {
+.products-swiper .title {
   font-size: 18px;
   font-weight: 900;
   color: rgb(216, 3, 3);
 }
-.products-categoty .title a {
+.products-swiper .title a {
   color: black;
   font-size: 16px;
   font-weight: normal;
 }
-.products-categoty .swiper-button-next,
-.products-categoty .swiper-button-prev {
+.products-swiper .swiper-button-next,
+.products-swiper .swiper-button-prev {
   width: 35px;
   height: 35px;
   border: 2px solid rgb(95, 95, 95);
@@ -121,8 +120,8 @@ export default {
   background-color: white;
   top: 35%;
 }
-.products-categoty .swiper-button-next::after,
-.products-categoty .swiper-button-prev::after {
+.products-swiper .swiper-button-next::after,
+.products-swiper .swiper-button-prev::after {
   font-size: 13px;
   display: flex;
   justify-content: center;
