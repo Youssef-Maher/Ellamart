@@ -42,7 +42,7 @@
               }}</span
             >
           </v-card-text>
-          <v-btn-toggle v-model="shownItem[item.title]">
+          <v-btn-toggle v-model="shownItem[item.title]" style="width: 100%">
             <v-btn
               v-for="(pic, i) in item.images"
               :value="pic"
