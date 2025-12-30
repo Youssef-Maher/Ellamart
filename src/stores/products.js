@@ -5,6 +5,7 @@ export const productsModule = defineStore("productsModule", {
   state: () => ({
     flashDeals: [],
     categoryProducts: [],
+    singleProduct: [],
     categories: [
       { title: "Smartphones", route: "smartphones" },
       { title: "Laptops", route: "laptops" },
@@ -19,7 +20,12 @@ export const productsModule = defineStore("productsModule", {
     async getProducts() {
       await axios
         .get("https://dummyjson.com/products")
-        .then((res) => (this.flashDeals = res.data.products.slice(0, 8)))
+        .then(
+          (res) => (
+            (this.flashDeals = res.data.products.slice(0, 8)),
+            console.log(this.flashDeals)
+          )
+        )
         .catch((err) => console.log(err));
     },
 
@@ -27,6 +33,11 @@ export const productsModule = defineStore("productsModule", {
       await axios
         .get(`https://dummyjson.com/products/category/${category}`)
         .then((res) => (this.categoryProducts = res.data));
+    },
+    async getSingleProduct(productId) {
+      await axios
+        .get(`https://dummyjson.com/products/${productId}`)
+        .then((res) => (this.singleProduct = res.data));
     },
   },
 });

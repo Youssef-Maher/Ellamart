@@ -13,8 +13,8 @@ const routes = [
     component: () => import("@/views/ProductsCategory.vue"),
   },
   {
-    path: "/products/product-detail",
-    name: "product_detail",
+    path: "/products/product-details/:productId",
+    name: "product_details",
     component: () => import("@/views/ProductDetails.vue"),
   },
 ];

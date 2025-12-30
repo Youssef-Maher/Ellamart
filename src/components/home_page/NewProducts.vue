@@ -80,6 +80,12 @@
                     class="my-3 py-1 px-5"
                     variant="outlined"
                     density="compact"
+                    @click="
+                      $router.push({
+                        name: 'product_details',
+                        params: { productId: item.id },
+                      })
+                    "
                     >Choose Options</v-btn
                   >
                 </div>
