@@ -95,12 +95,12 @@
               <v-menu activator="#language-btn">
                 <v-list v-model:selected="selectedLang">
                   <v-list-item
-                    v-for="item in langs"
-                    :key="item.lang"
-                    :value="item"
+                    v-for="lang in langs"
+                    :key="lang.lang"
+                    :value="lang"
                   >
                     <v-list-item-title
-                      >{{ item.lang }} {{ item.currency }}</v-list-item-title
+                      >{{ lang.lang }} {{ lang.currency }}</v-list-item-title
                     >
                   </v-list-item>
                 </v-list>

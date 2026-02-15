@@ -35,7 +35,7 @@
         }
       }
       p {
-        font-size: 25px;
+        font-size: 22px;
       }
       .main-btn {
         margin-top: 80px;

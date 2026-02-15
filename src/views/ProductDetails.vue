@@ -11,7 +11,7 @@
                 alt=""
                 width="100"
                 height="100"
-                style="over-flow: hidden; object-fit: cover"
+                style="overflow: hidden; object-fit: cover"
               />
             </v-tab>
           </v-tabs>
@@ -62,7 +62,9 @@
             ></v-number-input>
             <v-card-text>Subtotal:</v-card-text>
             <v-card-actions>
-              <v-btn style="background-color: rgb(37, 37, 37); color: white"
+              <v-btn
+                style="background-color: rgb(37, 37, 37); color: white"
+                @click="addToCart(singleProduct)"
                 >add to card</v-btn
               >
             </v-card-actions>
@@ -76,6 +78,7 @@
 <script>
 import { productsModule } from "@/stores/products";
 import { mapActions, mapState } from "pinia";
+import { cartStore } from "@/stores/cart";
 export default {
   name: "ProductDetails",
   data() {
@@ -88,6 +91,12 @@ export default {
   },
   methods: {
     ...mapActions(productsModule, ["getSingleProduct"]),
+    ...mapActions(cartStore, ["addItem"]),
+    addToCart(item) {
+      item.quantity = this.quantity;
+
+      this.addItem(item);
+    },
   },
   async mounted() {
     await this.getSingleProduct(this.$route.params.productId);
