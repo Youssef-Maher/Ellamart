@@ -24,14 +24,16 @@
             style="height: 230px; object-fit: cover"
             alt=""
           />
-          <v-card-text class="pl-0 pb-1"
+          <v-card-text class="card-title pl-0 pb-1"
             >{{ item.title }}
+          </v-card-text>
+          <v-card-text class="description pl-0 pb-1">
             {{
               item.description.split(" ").length <= 10
                 ? item.description
-                : item.description.split(" ").slice(0, 12).join(" ") + " ..."
-            }}</v-card-text
-          >
+                : item.description.split(" ").slice(0, 10).join(" ") + " ..."
+            }}
+          </v-card-text>
           <v-rating
             v-model="item.rating"
             half-increments
@@ -42,7 +44,7 @@
           >
           </v-rating>
           <v-card-text class="pl-0 pt-0">
-            <del>${{ item.price }}</del> From
+            <del class="pr-2">${{ item.price }}</del>
             <span class="text-red font-weight-bold" style="font-size: 16px"
               >${{
                 Math.ceil(
@@ -114,34 +116,47 @@ export default {
 };
 </script>
 <style>
-.products-swiper .title {
-  font-size: 18px;
-  font-weight: 900;
-  color: rgb(216, 3, 3);
+.products-swiper {
+  .title {
+    font-size: 18px;
+    font-weight: 900;
+    color: rgb(216, 3, 3);
+    a {
+      color: black;
+      font-size: 16px;
+      font-weight: normal;
+    }
+  }
+  .card-title {
+    font-weight: 600;
+  }
+  .description {
+    padding: 0;
+  }
 }
-.products-swiper .title a {
-  color: black;
-  font-size: 16px;
-  font-weight: normal;
+.products-swiper {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 35px;
+    height: 35px;
+    border: 2px solid rgb(95, 95, 95);
+    border-radius: 50%;
+    background-color: white;
+    top: 35%;
+  }
 }
-.products-swiper .swiper-button-next,
-.products-swiper .swiper-button-prev {
-  width: 35px;
-  height: 35px;
-  border: 2px solid rgb(95, 95, 95);
-  border-radius: 50%;
-  background-color: white;
-  top: 35%;
+.products-swiper {
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(53, 53, 53);
+    font-weight: 900;
+  }
 }
-.products-swiper .swiper-button-next::after,
-.products-swiper .swiper-button-prev::after {
-  font-size: 13px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(53, 53, 53);
-  font-weight: 900;
-}
+
 .swiper-pagination-bullet {
   width: 10px;
   height: 10px;

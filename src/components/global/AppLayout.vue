@@ -2,13 +2,13 @@
   <div class="layout">
     <v-app>
       <v-layout>
-        <CartDrawer :app="true" />
-        <AppNav :app="true" />
+        <CartDrawer />
+        <AppNav />
         <FixedNav />
         <v-main style="padding-top: 140px">
           <slot></slot>
         </v-main>
-        <AppFooter :app="true" />
+        <AppFooter />
       </v-layout>
     </v-app>
   </div>
