@@ -2,10 +2,37 @@
   <UpperBanner />
   <TheFeatures />
   <TopOffers />
-  <ProductsSwiper :products="flashDeals" />
+  <ProductsSwiper
+    :products="flashDeals"
+    title="Flash Deals"
+    title-color="red"
+  />
   <TopCategories />
-  <NewProducts :products="flashDeals" />
+  <NewProducts :products="newProducts" />
   <QualityFeatures />
+  <ProductsSwiper :products="mobilePhones" title="Mobile Phones" />
+  <v-container>
+    <v-row>
+      <v-col cols="6">
+        <img
+          src="@/assets/images/pretium.webp"
+          alt="pretium"
+          style="width: 100%"
+        />
+      </v-col>
+      <v-col cols="6">
+        <img
+          src="@/assets/images/ligular.webp"
+          alt="ligular"
+          style="width: 100%"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
+  <ProductsSwiper :products="laptops" title="Laptops" />
+  <img src="@/assets/images/xled-tv.webp" alt="xled-tv" style="width: 100%" />
+  <ProductsSwiper :products="mensWatches" title="Men's Watches" />
+  <WhyShopWithUs />
 </template>
 
 <script>
@@ -18,6 +45,7 @@ import { productsModule } from "@/stores/products";
 import { mapActions, mapState } from "pinia";
 import QualityFeatures from "@/components/home_page/QualityFeatures.vue";
 import NewProducts from "@/components/home_page/NewProducts.vue";
+import WhyShopWithUs from "@/components/home_page/WhyShopWithUs.vue";
 export default {
   name: "HomeView",
   components: {
@@ -28,15 +56,30 @@ export default {
     TopCategories,
     NewProducts,
     QualityFeatures,
+    WhyShopWithUs,
   },
   computed: {
-    ...mapState(productsModule, ["flashDeals"]),
+    ...mapState(productsModule, [
+      "flashDeals",
+      "newProducts",
+      "mobilePhones",
+      "laptops",
+      "mensWatches",
+    ]),
   },
   methods: {
-    ...mapActions(productsModule, ["getProducts"]),
+    ...mapActions(productsModule, [
+      "getProducts",
+      "getMobilePhones",
+      "getLaptops",
+      "getMensWatches",
+    ]),
   },
   mounted() {
     this.getProducts();
+    this.getMobilePhones();
+    this.getLaptops();
+    this.getMensWatches();
   },
 };
 </script>

@@ -4,6 +4,7 @@
       <h2>{{ $route.params.title }}</h2>
       <a href="#">Shop All</a>
     </div>
+
     <div class="d-flex" style="gap: 20px">
       <v-col cols="3" v-for="item in categoryProducts.products" :key="item.id">
         <v-card elevation="0" class="pb-5">

@@ -1,13 +1,25 @@
 <template>
-  <div class="new-products pt-12">
+  <div class="new-products py-16 px-5">
     <v-container fluid>
-      <div class="title"><h2>New Products</h2></div>
+      <div class="title mb-10 d-flex justify-space-between align-center">
+        <h2>New Products</h2>
+        <a href="#">Shop All</a>
+      </div>
+      <v-row v-if="products.length === 0">
+        <v-col>
+          <v-row>
+            <v-col cols="3" v-for="num in 4" :key="num">
+              <v-skeleton-loader type="image, article"></v-skeleton-loader>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col cols="7" class="pt-15">
           <swiper
             :pagination="{ el: '.swiper-pagination', clickable: true }"
             :modules="modules"
-            :slides-per-view="3"
+            :slides-per-view="2"
             :space-between="20"
             class="pb-9 px-5"
             :autoplay="{ delay: 3000 }"
@@ -22,17 +34,24 @@
                       : item.thumbnail
                   "
                   class="w-100"
-                  style="height: 230px; object-fit: cover"
+                  style="height: 200px; object-fit: cover"
                   alt=""
                 />
-                <v-card-text class="pl-0 pb-1"
-                  >{{ item.title }}
+                <v-card-text class="card-title pl-0 pb-1"
+                  >{{
+                    item.title.split(" ").length <= 4
+                      ? item.title
+                      : item.title.split(" ").slice(0, 4).join(" ") + " ..."
+                  }}
+                </v-card-text>
+                <v-card-text class="description pl-0 pb-1">
                   {{
-                    item.description.split(" ").lenght <= 10
+                    item.description.split(" ").length <= 10
                       ? item.description
-                      : item.description.split(" ").slice(0, 4).join(" ")
-                  }}</v-card-text
-                >
+                      : item.description.split(" ").slice(0, 12).join(" ") +
+                        " ..."
+                  }}
+                </v-card-text>
                 <v-rating
                   v-model="item.rating"
                   half-increments
@@ -94,7 +113,7 @@
             <div class="swiper-pagination"></div>
           </swiper>
         </v-col>
-        <v-col cols="5">
+        <v-col cols="5 " style="align-self: center">
           <img src="@/assets/images/new-products.webp" alt="" class="w-100" />
         </v-col>
       </v-row>
@@ -125,3 +144,23 @@ export default {
   }),
 };
 </script>
+<style lang="scss">
+.new-products {
+  .title {
+    font-size: 18px;
+    font-weight: 900;
+    color: black;
+  }
+  a {
+    color: black;
+    font-size: 16px;
+    font-weight: normal;
+  }
+  .card-title {
+    font-weight: 600;
+  }
+  .description {
+    padding: 0;
+  }
+}
+</style>

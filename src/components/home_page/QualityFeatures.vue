@@ -4,7 +4,7 @@
       <v-row justify="space-between">
         <v-col v-for="feature in features" :key="feature.title" class="pa-1">
           <v-card
-            class="d-flex flex-column justify-center align-center px-2 py-16 bg-white h-100 text-center"
+            class="d-flex flex-column justify-center align-center px-2 py-16 bg-white h-100 text-center ma-1"
             elevation="0"
           >
             <v-icon
@@ -12,7 +12,7 @@
               style="color: #7420d5; font-size: 70px"
               :icon="feature.icon"
             ></v-icon>
-            <h2>{{ feature.title }}</h2>
+            <h2 style="font-size: 18px">{{ feature.title }}</h2>
             <v-card-text>{{ feature.description }}</v-card-text>
           </v-card>
         </v-col>

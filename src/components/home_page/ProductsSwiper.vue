@@ -1,9 +1,20 @@
 <template>
   <div class="products-swiper py-16 px-10">
     <div class="title mb-10 d-flex justify-space-between align-center">
-      <h2>Flash Deals</h2>
+      <h2 :class="`text-${titleColor}`">{{ title }}</h2>
       <a href="#">Shop All</a>
     </div>
+    <v-container fluid v-if="products.length === 0">
+      <v-row>
+        <v-col>
+          <v-row>
+            <v-col cols="3" v-for="num in 4" :key="num">
+              <v-skeleton-loader type="image, article"></v-skeleton-loader>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
     <swiper
       :pagination="{ el: '.swiper-pagination', clickable: true }"
       :modules="modules"
@@ -25,13 +36,17 @@
             alt=""
           />
           <v-card-text class="card-title pl-0 pb-1"
-            >{{ item.title }}
+            >{{
+              item.title.split(" ").length <= 3
+                ? item.title
+                : item.title.split(" ").slice(0, 3).join(" ") + " ..."
+            }}
           </v-card-text>
           <v-card-text class="description pl-0 pb-1">
             {{
               item.description.split(" ").length <= 10
                 ? item.description
-                : item.description.split(" ").slice(0, 10).join(" ") + " ..."
+                : item.description.split(" ").slice(0, 9).join(" ") + " ..."
             }}
           </v-card-text>
           <v-rating
@@ -100,6 +115,12 @@ export default {
     products: {
       type: Array,
     },
+    title: {
+      type: String,
+    },
+    titleColor: {
+      type: String,
+    },
   },
   setup() {
     return {
@@ -115,12 +136,11 @@ export default {
   }),
 };
 </script>
-<style>
+<style lang="scss">
 .products-swiper {
   .title {
     font-size: 18px;
     font-weight: 900;
-    color: rgb(216, 3, 3);
     a {
       color: black;
       font-size: 16px;
