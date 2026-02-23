@@ -4,7 +4,7 @@
       <h2 :class="`text-${titleColor}`">{{ title }}</h2>
       <a href="#">Shop All</a>
     </div>
-    <v-container fluid v-if="products.length === 0">
+    <v-container fluid v-if="loading">
       <v-row>
         <v-col>
           <v-row>

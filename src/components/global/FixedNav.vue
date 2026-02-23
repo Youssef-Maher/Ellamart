@@ -8,7 +8,7 @@
               ><img src="@/assets/images/logo.png" alt=""
             /></router-link>
           </v-col>
-          <v-col cols="7" class="d-flex align-center">
+          <v-col cols="8" class="d-flex align-center">
             <ul class="d-flex text-white">
               <li v-for="category in categories" :key="category.title">
                 <router-link
@@ -23,7 +23,7 @@
             </ul>
           </v-col>
           <v-col
-            cols="3"
+            cols="2"
             class="d-flex justify-end align-center"
             style="gap: 30px"
           >
