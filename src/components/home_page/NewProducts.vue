@@ -37,13 +37,13 @@
                   style="height: 200px; object-fit: cover"
                   alt=""
                 />
-                <v-card-text class="card-title pl-0 pb-1"
+                <v-card-title class="card-title pl-0 pb-1"
                   >{{
                     item.title.split(" ").length <= 4
                       ? item.title
                       : item.title.split(" ").slice(0, 4).join(" ") + " ..."
                   }}
-                </v-card-text>
+                </v-card-title>
                 <v-card-text class="description pl-0 pb-1">
                   {{
                     item.description.split(" ").length <= 10
@@ -158,6 +158,7 @@ export default {
   }
   .card-title {
     font-weight: 600;
+    font-size: 17px;
   }
   .description {
     padding: 0;

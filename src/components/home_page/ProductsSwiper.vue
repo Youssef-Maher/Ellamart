@@ -27,21 +27,31 @@
     >
       <swiper-slide v-for="item in products" :key="item.id">
         <v-card elevation="0" class="pb-5">
-          <img
-            :src="
-              shownItem[item.title] ? shownItem[item.title] : item.thumbnail
-            "
-            class="w-100"
-            style="height: 230px; object-fit: cover"
-            alt=""
-          />
-          <v-card-text class="card-title pl-0 pb-1"
+          <v-hover>
+            <div style="position: relative">
+              <img
+                :src="
+                  shownItem[item.title] ? shownItem[item.title] : item.thumbnail
+                "
+                class="w-100"
+                style="height: 230px; object-fit: cover"
+                alt=""
+              />
+              <v-btn
+                @click="openQuickView(item)"
+                class="quick-view"
+                density="compact"
+                >Quick View</v-btn
+              >
+            </div>
+          </v-hover>
+          <v-card-title class="card-title pl-0 pb-1"
             >{{
               item.title.split(" ").length <= 3
                 ? item.title
                 : item.title.split(" ").slice(0, 3).join(" ") + " ..."
             }}
-          </v-card-text>
+          </v-card-title>
           <v-card-text class="description pl-0 pb-1">
             {{
               item.description.split(" ").length <= 10
@@ -111,6 +121,12 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation, Autoplay } from "swiper";
 export default {
+  inject: ["Emitter"],
+  methods: {
+    openQuickView(product) {
+      this.Emitter.emit("openQuickView", product);
+    },
+  },
   props: {
     products: {
       type: Array,
@@ -133,6 +149,7 @@ export default {
   },
   data: () => ({
     shownItem: {},
+    loading: false,
   }),
 };
 </script>
@@ -149,9 +166,17 @@ export default {
   }
   .card-title {
     font-weight: 600;
+    font-size: 17px;
   }
   .description {
     padding: 0;
+  }
+  .quick-view {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
   }
 }
 .products-swiper {

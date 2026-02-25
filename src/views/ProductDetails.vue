@@ -87,7 +87,7 @@
                 <v-icon @click="quantity > 1 ? quantity-- : (quantity = 1)"
                   >mdi-minus</v-icon
                 >
-                <input type="number" :value="quantity" />
+                <input type="number" v-model="quantity" />
                 <v-icon @click="quantity++">mdi-plus</v-icon>
               </div>
               <v-card-text

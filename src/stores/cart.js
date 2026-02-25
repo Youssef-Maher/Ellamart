@@ -26,5 +26,9 @@ export const cartStore = defineStore("cartStore", {
       }
       console.log(this.cartItems);
     },
+    deleteItem(itemId) {
+      this.cartItems = this.cartItems.filter((item) => item.id !== itemId);
+      localStorage.setItem("cart-items", JSON.stringify(this.cartItems));
+    },
   },
 });
