@@ -64,8 +64,8 @@
         </div>
       </div>
       <v-card-action>
-        <v-btn>Checkout</v-btn>
-        <v-btn>View Cart</v-btn>
+        <v-btn to="/checkout-page">Checkout</v-btn>
+        <v-btn to="/cart-page">View Cart</v-btn>
       </v-card-action>
     </v-navigation-drawer>
   </div>
@@ -94,6 +94,7 @@ export default {
     });
     this.getCartItems();
   },
+  components: {},
 };
 </script>
 <style lang="scss">
