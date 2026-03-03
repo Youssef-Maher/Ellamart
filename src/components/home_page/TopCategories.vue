@@ -7,7 +7,6 @@
       <v-container>
         <div class="title mb-10 d-flex justify-space-between align-center">
           <h2>Shop By Categories</h2>
-          <a href="#">Shop All</a>
         </div>
         <v-row>
           <v-col

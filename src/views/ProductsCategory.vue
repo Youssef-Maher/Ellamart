@@ -73,6 +73,7 @@
                   <v-btn-toggle
                     v-model="shownItem[item.title]"
                     style="width: 100%"
+                    mandatory
                   >
                     <v-btn
                       v-for="(pic, i) in item.images"

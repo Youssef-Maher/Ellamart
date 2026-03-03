@@ -2,7 +2,7 @@
   <div class="products-swiper py-16 px-10">
     <div class="title mb-10 d-flex justify-space-between align-center">
       <h2 :class="`text-${titleColor}`">{{ title }}</h2>
-      <a href="#">Shop All</a>
+      <a :href="link">Shop All</a>
     </div>
     <v-container fluid v-if="loading">
       <v-row>
@@ -22,7 +22,13 @@
       :space-between="35"
       class="pb-10 px-8"
       :navigation="{ prevIcon: '.swiper-prev', nextIcon: '.swiper-next' }"
-      :autoplay="{ delay: 3000 }"
+      :autoplay="{
+        delay: 3000,
+        pauseOnMouseEnter: true,
+        disableOnInteraction: false,
+      }"
+      :loop="true"
+      `
       :speed="1000"
     >
       <swiper-slide v-for="item in products" :key="item.id">
@@ -73,7 +79,11 @@
               >$ {{ item.price }}</span
             >
           </v-card-text>
-          <v-btn-toggle v-model="shownItem[item.title]" style="width: 100%">
+          <v-btn-toggle
+            v-model="shownItem[item.title]"
+            style="width: 100%"
+            mandatory
+          >
             <v-btn
               v-for="(pic, i) in item.images"
               :value="pic"
@@ -130,6 +140,9 @@ export default {
       type: String,
     },
     titleColor: {
+      type: String,
+    },
+    link: {
       type: String,
     },
   },

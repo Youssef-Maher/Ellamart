@@ -3,7 +3,6 @@
     <v-container fluid>
       <div class="title mb-10 d-flex justify-space-between align-center">
         <h2>New Products</h2>
-        <a href="#">Shop All</a>
       </div>
       <v-row v-if="products.length === 0">
         <v-col>
@@ -22,7 +21,12 @@
             :slides-per-view="2"
             :space-between="20"
             class="pb-9 px-5"
-            :autoplay="{ delay: 3000 }"
+            :autoplay="{
+              delay: 3000,
+              pauseOnMouseEnter: true,
+              disableOnInteraction: false,
+            }"
+            :loop="true"
             :speed="1000"
           >
             <swiper-slide v-for="item in products" :key="item.id">
@@ -81,6 +85,7 @@
                 <v-btn-toggle
                   v-model="shownItem[item.title]"
                   style="width: 100%"
+                  mandatory
                 >
                   <v-btn
                     v-for="(pic, i) in item.images"

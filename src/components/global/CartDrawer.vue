@@ -118,8 +118,11 @@
           <span>${{ totalPrice.toFixed(2) }}</span>
         </div>
         <div class="d-flex justify-space-between" v-if="cartItems.length > 0">
-          <v-btn @click="drower = false" to="/checkout" class="checkout-btn"
-            >Checkout</v-btn
+          <v-btn
+            @click="drower = false"
+            class="c-shopping-btn"
+            style="font-size: 12px"
+            >Continue Shopping</v-btn
           >
           <v-btn @click="drower = false" to="/cart-page" class="cart-btn"
             >View Cart</v-btn
@@ -250,12 +253,12 @@ export default {
     font-size: 18px;
     font-weight: 600;
   }
-  .checkout-btn,
+  .c-shopping-btn,
   .cart-btn {
     background-color: #008af8;
     color: white;
     border-radius: 30px;
-    width: 48%;
+    width: 49%;
     padding: 10px 15px;
   }
   .cart-btn,

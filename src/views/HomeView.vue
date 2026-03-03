@@ -6,11 +6,16 @@
     :products="flashDeals"
     title="Flash Deals"
     title-color="red"
+    link="/products/fragrances"
   />
   <TopCategories />
   <NewProducts :products="newProducts" />
   <QualityFeatures />
-  <ProductsSwiper :products="mobilePhones" title="Mobile Phones" />
+  <ProductsSwiper
+    :products="mobilePhones"
+    title="Mobile Phones"
+    link="/products/smartphones"
+  />
   <v-container>
     <v-row>
       <v-col cols="6">
@@ -29,9 +34,17 @@
       </v-col>
     </v-row>
   </v-container>
-  <ProductsSwiper :products="laptops" title="Laptops" />
+  <ProductsSwiper
+    :products="laptops"
+    title="Laptops"
+    link="/products/laptops"
+  />
   <img src="@/assets/images/xled-tv.webp" alt="xled-tv" style="width: 100%" />
-  <ProductsSwiper :products="mensWatches" title="Men's Watches" />
+  <ProductsSwiper
+    :products="mensWatches"
+    title="Men's Watches"
+    link="/products/mens-watches"
+  />
   <WhyShopWithUs />
 </template>
 

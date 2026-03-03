@@ -36,7 +36,7 @@
             <div class="cart d-flex flex-column align-center" @click="openCart">
               <v-badge
                 location="right top"
-                content="2"
+                :content="cartItems.length"
                 color="blue"
                 offset-x="-12"
                 offset-y="3"
@@ -53,6 +53,7 @@
 <script>
 import { productsModule } from "@/stores/products";
 import { mapState } from "pinia";
+import { cartStore } from "@/stores/cart";
 export default {
   inject: ["Emitter"],
   methods: {
@@ -62,6 +63,7 @@ export default {
   },
   computed: {
     ...mapState(productsModule, ["categories"]),
+    ...mapState(cartStore, ["cartItems"]),
   },
 };
 </script>
