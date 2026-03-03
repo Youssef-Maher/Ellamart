@@ -45,63 +45,57 @@
               type="article, article"
             ></v-skeleton-loader>
             <v-card elevation="0" v-if="!loading">
-              <v-card-title class="card-title">{{
+              <v-card-title class="card-title pb-2 px-0">{{
                 singleProduct.title
               }}</v-card-title>
-              <v-card-subtitle>
-                Category: {{ singleProduct.category }}
-              </v-card-subtitle>
-              <div class="rating">
+              <div class="d-flex align-center mb-2">
                 <v-rating
+                  class="mr-3"
                   color="#fcca41"
                   size="x-small"
                   half-increments
                   readonly
                   v-model="singleProduct.rating"
                 ></v-rating>
-                <span>stock:{{ singleProduct.stock }}</span>
+                <span>Stock: {{ singleProduct.stock }}</span>
               </div>
-
-              <v-card-text>
+              <v-card-text class="description py-2 px-0">
                 {{ singleProduct.description }}
               </v-card-text>
-              <v-card-subtitle
-                >Brand: {{ singleProduct.brand }}</v-card-subtitle
-              >
-              <v-card-subtitle
-                >Available: {{ singleProduct.stock }}</v-card-subtitle
-              >
-              <v-card-text
-                ><del
-                  >$<span>{{ singleProduct.price * quantity }}</span></del
-                >
-                From $<span>{{
-                  Math.ceil(
-                    singleProduct.price -
-                      singleProduct.price *
-                        (singleProduct.discountPercentage / 100)
-                  ) * quantity
-                }}</span>
+              <v-card-text class="info"
+                >Brand: <span>{{ singleProduct.brand }}</span>
               </v-card-text>
-              <div class="counter">
-                <v-icon @click="quantity > 1 ? quantity-- : (quantity = 1)"
-                  >mdi-minus</v-icon
-                >
-                <input type="number" v-model="quantity" />
-                <v-icon @click="quantity++">mdi-plus</v-icon>
-              </div>
-              <v-card-text
-                >Subtotal:
-                {{
-                  Math.ceil(
-                    singleProduct.price -
-                      singleProduct.price *
-                        (singleProduct.discountPercentage / 100)
-                  ) * quantity
-                }}</v-card-text
+              <v-card-text class="info"
+                >Available: <span>{{ singleProduct.stock }}</span></v-card-text
               >
-              <v-card-actions>
+              <v-card-text class="info"
+                >SKU: <span>{{ singleProduct.sku }}</span></v-card-text
+              >
+              <v-card-text class="info"
+                >Price:
+                <span class="text-red" style="font-size: 18px"
+                  >${{ singleProduct.price }}</span
+                >
+              </v-card-text>
+              <div class="d-flex space-between py-2">
+                <span class="info mr-3">Quantity:</span>
+                <div class="counter">
+                  <v-icon @click="quantity > 1 ? quantity-- : (quantity = 1)"
+                    >mdi-minus</v-icon
+                  >
+                  <input type="number" v-model="quantity" />
+                  <v-icon @click="quantity++">mdi-plus</v-icon>
+                </div>
+              </div>
+              <v-card-text class="info pt-5"
+                >Subtotal:
+                <span class="text-red" style="font-size: 18px"
+                  >${{ (singleProduct.price * quantity).toFixed(2) }}</span
+                >
+              </v-card-text>
+              <v-card-actions class="pa-0 mt-5">
                 <v-btn
+                  :loading="loadState"
                   class="add-btn"
                   style="background-color: rgb(37, 37, 37); color: white"
                   @click="addToCart(singleProduct)"
@@ -121,12 +115,13 @@ import { productsModule } from "@/stores/products";
 import { mapActions, mapState } from "pinia";
 import { cartStore } from "@/stores/cart";
 export default {
-  name: "ProductDetails",
+  inject: ["Emitter"],
   data() {
     return {
       quantity: 1,
       tab: {},
       loading: false,
+      loadState: false,
     };
   },
   computed: {
@@ -137,8 +132,12 @@ export default {
     ...mapActions(cartStore, ["addItem"]),
     addToCart(item) {
       item.quantity = this.quantity;
-
       this.addItem(item);
+      this.loadState = true;
+      setTimeout(() => {
+        this.Emitter.emit("openCart");
+        this.loadState = false;
+      }, 500);
     },
   },
   async mounted() {
@@ -151,8 +150,22 @@ export default {
 <style lang="scss">
 .product-details {
   .card-title {
-    font-size: 23px;
-    line-height: 1.5;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .v-rating__wrapper {
+    width: 18px;
+  }
+  .description {
+    font-size: 14px;
+    color: grey;
+  }
+  .info {
+    padding: 5px 0;
+    span {
+      color: black;
+      font-weight: 600;
+    }
   }
   .counter {
     border: 1px solid rgba(117, 117, 117, 0.5);
@@ -163,7 +176,7 @@ export default {
       outline: none;
       border: none;
       text-align: center;
-      width: 100px;
+      width: 40px;
     }
   }
   .add-btn {

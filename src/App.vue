@@ -2,6 +2,7 @@
   <app-layout>
     <router-view></router-view>
     <QuickView />
+    <OrderSuccess />
   </app-layout>
 </template>
 
@@ -9,11 +10,13 @@
 import AppLayout from "./components/global/AppLayout.vue";
 
 import QuickView from "@/components/global/QuickVue.vue";
+import OrderSuccess from "@/components/order_success/OrderSuccess.vue";
 export default {
   name: "App",
   components: {
     AppLayout,
     QuickView,
+    OrderSuccess,
   },
 };
 </script>

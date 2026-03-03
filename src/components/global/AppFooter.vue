@@ -1,6 +1,6 @@
 <template>
   <div class="app-footer">
-    <v-footer :app="true" absolute class="pa-0 d-block">
+    <v-footer :app="true" absolute class="pa-0 d-block" color="#f4f4f4">
       <div class="d-flex pa-5">
         <v-container>
           <v-row>
@@ -116,7 +116,7 @@ export default {
 .copyright {
   text-align: center;
   padding: 15px 0;
-  background-color: #ebebeb;
+  background-color: #d7d7d7;
   font-size: 14px;
   p {
     margin: 0;

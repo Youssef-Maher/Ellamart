@@ -27,16 +27,26 @@
           >
             <swiper-slide v-for="item in products" :key="item.id">
               <v-card elevation="0" class="pb-5">
-                <img
-                  :src="
-                    shownItem[item.title]
-                      ? shownItem[item.title]
-                      : item.thumbnail
-                  "
-                  class="w-100"
-                  style="height: 200px; object-fit: cover"
-                  alt=""
-                />
+                <v-hover v-slot="{ isHovering, props }">
+                  <div style="position: relative" v-bind="props">
+                    <img
+                      :src="
+                        shownItem[item.title]
+                          ? shownItem[item.title]
+                          : item.thumbnail
+                      "
+                      class="w-100"
+                      style="height: 200px; object-fit: cover"
+                      alt=""
+                    />
+                    <v-btn
+                      :style="{ opacity: isHovering ? 1 : 0 }"
+                      @click="openQuickView(item)"
+                      class="quick-view"
+                      >Quick View</v-btn
+                    >
+                  </div>
+                </v-hover>
                 <v-card-title class="card-title pl-0 pb-1"
                   >{{
                     item.title.split(" ").length <= 4
@@ -62,17 +72,11 @@
                 >
                 </v-rating>
                 <v-card-text class="pl-0 pt-0">
-                  <del>${{ item.price }}</del> From
                   <span
                     class="text-red font-weight-bold"
                     style="font-size: 16px"
-                    >${{
-                      Math.ceil(
-                        item.price -
-                          item.price * (item.discountPercentage / 100)
-                      )
-                    }}</span
-                  >
+                    >${{ item.price }}
+                  </span>
                 </v-card-text>
                 <v-btn-toggle
                   v-model="shownItem[item.title]"
@@ -125,9 +129,15 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Autoplay } from "swiper";
 export default {
+  inject: ["Emitter"],
   props: {
     products: {
       type: Array,
+    },
+  },
+  methods: {
+    openQuickView(product) {
+      this.Emitter.emit("openQuickView", product);
     },
   },
   setup() {
@@ -155,6 +165,16 @@ export default {
     color: black;
     font-size: 16px;
     font-weight: normal;
+  }
+  .quick-view {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    border: 1px solid black;
+    border-radius: 30px;
+    width: fit-content;
   }
   .card-title {
     font-weight: 600;

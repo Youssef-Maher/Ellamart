@@ -53,7 +53,7 @@
               >
                 <v-badge
                   location="right top"
-                  content="2"
+                  :content="cartItems.length"
                   color="blue"
                   offset-x="-12"
                   offset-y="3"
@@ -115,6 +115,7 @@
 </template>
 <script>
 import { productsModule } from "@/stores/products";
+import { cartStore } from "@/stores/cart";
 import { mapState } from "pinia";
 export default {
   inject: ["Emitter"],
@@ -134,6 +135,7 @@ export default {
   },
   computed: {
     ...mapState(productsModule, ["categories"]),
+    ...mapState(cartStore, ["cartItems"]),
   },
 };
 </script>

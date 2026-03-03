@@ -27,8 +27,8 @@
     >
       <swiper-slide v-for="item in products" :key="item.id">
         <v-card elevation="0" class="pb-5">
-          <v-hover>
-            <div style="position: relative">
+          <v-hover v-slot="{ isHovering, props }">
+            <div style="position: relative" v-bind="props">
               <img
                 :src="
                   shownItem[item.title] ? shownItem[item.title] : item.thumbnail
@@ -38,11 +38,11 @@
                 alt=""
               />
               <v-btn
+                :style="{ opacity: isHovering ? 1 : 0 }"
                 @click="openQuickView(item)"
                 class="quick-view"
-                density="compact"
-                >Quick View</v-btn
-              >
+                >Quick View
+              </v-btn>
             </div>
           </v-hover>
           <v-card-title class="card-title pl-0 pb-1"
@@ -69,13 +69,8 @@
           >
           </v-rating>
           <v-card-text class="pl-0 pt-0">
-            <del class="pr-2">${{ item.price }}</del>
             <span class="text-red font-weight-bold" style="font-size: 16px"
-              >${{
-                Math.ceil(
-                  item.price - item.price * (item.discountPercentage / 100)
-                )
-              }}</span
+              >$ {{ item.price }}</span
             >
           </v-card-text>
           <v-btn-toggle v-model="shownItem[item.title]" style="width: 100%">
@@ -177,6 +172,9 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity 0.3s ease;
+    border: 1px solid black;
+    border-radius: 30px;
+    width: fit-content;
   }
 }
 .products-swiper {

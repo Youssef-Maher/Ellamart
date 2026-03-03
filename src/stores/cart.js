@@ -18,17 +18,22 @@ export const cartStore = defineStore("cartStore", {
         this.cartItems.push(JSON.parse(JSON.stringify(item)));
       }
       localStorage.setItem("cart-items", JSON.stringify(this.cartItems));
-      console.log(this.cartItems);
     },
     getCartItems() {
       if (localStorage.getItem("cart-items")) {
         this.cartItems = JSON.parse(localStorage.getItem("cart-items"));
       }
-      console.log(this.cartItems);
     },
     deleteItem(itemId) {
       this.cartItems = this.cartItems.filter((item) => item.id !== itemId);
       localStorage.setItem("cart-items", JSON.stringify(this.cartItems));
+    },
+    setItemQuantity() {
+      localStorage.setItem("cart-items", JSON.stringify(this.cartItems));
+    },
+    clearCart() {
+      this.cartItems = [];
+      localStorage.removeItem("cart-items");
     },
   },
 });
