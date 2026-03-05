@@ -18,14 +18,14 @@
   />
   <v-container>
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <img
           src="@/assets/images/pretium.webp"
           alt="pretium"
           style="width: 100%"
         />
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <img
           src="@/assets/images/ligular.webp"
           alt="ligular"

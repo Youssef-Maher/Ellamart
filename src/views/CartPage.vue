@@ -1,9 +1,9 @@
 <template>
-  <div class="cart-page pa-10">
+  <div class="cart-page pa-3 pa-sm-10">
     <v-container>
-      <h5>
+      <h4>
         Home <span><v-icon>mdi-chevron-right</v-icon></span> Shopping Cart
-      </h5>
+      </h4>
       <div
         v-if="cartItems.length === 0"
         class="d-flex justify-center"
@@ -40,66 +40,66 @@
           <p v-else class="mt-3">Your order now is included Free Shipping</p>
         </div>
 
-        <v-row>
-          <v-col cols="9">
-            <v-table>
-              <thead>
-                <tr>
-                  <th>PRODUCT</th>
-                  <th>PRICE</th>
-                  <th>QUANTITY</th>
-                  <th>TOTAL</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="product in cartItems" :key="product.id">
-                  <td class="d-flex pa-4" style="height: 120px">
-                    <img :src="product.thumbnail" />
-                    <div>
-                      <h3>{{ product.title }}</h3>
-                      <p>Category: {{ product.category }}</p>
-                    </div>
-                  </td>
-                  <td>${{ product.price }}</td>
-                  <td style="width: 130px">
-                    <div class="counter">
-                      <v-icon
-                        style="font-size: 20px"
-                        @click="
-                          product.quantity > 1
-                            ? product.quantity--
-                            : (product.quantity = 1);
-                          setItemQuantity();
-                        "
-                        >mdi-minus</v-icon
-                      >
-                      <input
-                        @input="setItemQuantity()"
-                        class="pa-0"
-                        type="number"
-                        v-model="product.quantity"
-                        min="1"
-                      />
-                      <v-icon
-                        @click="
-                          product.quantity++;
-                          setItemQuantity();
-                        "
-                        style="font-size: 20px"
-                        >mdi-plus</v-icon
-                      >
-                    </div>
-                  </td>
-                  <td>${{ (product.price * product.quantity).toFixed(2) }}</td>
-                  <td>
-                    <v-icon class="close-icon" @click="deleteItem(product.id)"
-                      >mdi-close</v-icon
+        <v-row class="justify-center ga-md-8 pa-0 pa-sm-4">
+          <v-col cols="12" md="6" class="mt-4 mt-sm-0">
+            <v-row
+              v-for="product in cartItems"
+              :key="product.id"
+              style="border-bottom: 1px solid #999999"
+            >
+              <v-col cols="3"
+                ><img
+                  :src="product.thumbnail"
+                  class="w-100"
+                  style="height: 100px; object-fit: cover"
+                />
+              </v-col>
+              <v-col cols="9" class="align-self-center">
+                <div class="d-flex justify-space-between">
+                  <h4>{{ product.title }}</h4>
+                  <v-icon class="close-icon" @click="deleteItem(product.id)"
+                    >mdi-close
+                  </v-icon>
+                </div>
+                <span class="text-red" style="font-weight: bold"
+                  >Price: ${{ product.price }}
+                </span>
+                <div class="d-flex justify-space-between align-center">
+                  <div class="counter">
+                    <v-icon
+                      style="font-size: 20px"
+                      @click="
+                        product.quantity > 1
+                          ? product.quantity--
+                          : (product.quantity = 1);
+                        setItemQuantity();
+                      "
+                      >mdi-minus</v-icon
                     >
-                  </td>
-                </tr>
-              </tbody>
-            </v-table>
-            <div class="my-10 py-4" style="border-top: 1px solid">
+                    <input
+                      @input="setItemQuantity()"
+                      class="pa-0"
+                      type="number"
+                      v-model="product.quantity"
+                      min="1"
+                    />
+                    <v-icon
+                      @click="
+                        product.quantity++;
+                        setItemQuantity();
+                      "
+                      style="font-size: 20px"
+                      >mdi-plus</v-icon
+                    >
+                  </div>
+                  <span style="font-weight: bold"
+                    >Total: ${{ (product.price * product.quantity).toFixed(2) }}
+                  </span>
+                </div>
+              </v-col>
+            </v-row>
+
+            <div class="mt-10 py-4">
               <h3>Additional Comments</h3>
               <textarea
                 placeholder="Special instruction for  seller"
@@ -112,7 +112,7 @@
               />
             </div>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" md="5">
             <h5 class="py-4" style="border-bottom: 1px solid">ORDER SUMMARY</h5>
             <div class="total-price d-flex justify-space-between pt-7 pb-2">
               <span>Subtotal:</span>
@@ -137,7 +137,7 @@
               </div>
               <h5 class="py-2 mt-3">Coupon Code:</h5>
               <input type="text" placeholder="Enter Coupon Code" />
-              <div class="total-price d-flex justify-space-between my-10 pb-3">
+              <div class="total-price d-flex justify-space-between my-5 pb-3">
                 <span>Total:</span>
                 <span class="text-red"
                   >${{
@@ -148,13 +148,15 @@
                   }}</span
                 >
               </div>
-              <v-btn
-                class="checkout-btn w-100"
-                to="/checkout"
-                @click="shippingCost()"
-                >Proceed to Checkout</v-btn
-              >
-              <v-btn class="Shopping-btn w-100" to="/">Continue Shopping</v-btn>
+              <div class="d-flex flex-column">
+                <v-btn
+                  class="checkout-btn"
+                  to="/checkout"
+                  @click="shippingCost()"
+                  >Proceed to Checkout</v-btn
+                >
+                <v-btn class="Shopping-btn" to="/">Continue Shopping</v-btn>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -230,6 +232,7 @@ export default {
   width: fit-content;
   border-radius: 30px;
   padding: 2px 5px;
+  margin: 10px 0;
   input {
     outline: none;
     border: none;
@@ -262,12 +265,25 @@ textarea {
   background-color: #008af8;
   color: white;
   border-radius: 30px;
-  padding: 10px 15px;
+  width: 60%;
+  margin: auto;
   margin-top: 20px;
+  height: 45px;
 }
 .Shopping-btn {
   color: black;
   background-color: #ffffff;
   border: 1px solid black;
+}
+@media (max-width: 550px) {
+  .checkout-btn,
+  .Shopping-btn {
+    width: 80%;
+  }
+}
+@media (max-width: 990px) {
+  textarea {
+    width: 100%;
+  }
 }
 </style>

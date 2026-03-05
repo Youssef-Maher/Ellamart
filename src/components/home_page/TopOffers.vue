@@ -2,7 +2,7 @@
   <div class="top-offers">
     <v-container fluid>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="6" sm="4" class="pa-1 pa-sm-3">
           <v-hover v-slot="{ isHovering, props }">
             <div
               class="item"
@@ -19,7 +19,7 @@
             </div>
           </v-hover>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="6" sm="4" class="pa-1 pa-sm-3">
           <v-hover v-slot="{ isHovering, props }">
             <div
               class="item"
@@ -36,7 +36,7 @@
             </div>
           </v-hover>
         </v-col>
-        <v-col cols="4">
+        <v-col cols="12" sm="4" class="pa-1 pa-sm-3">
           <v-hover v-slot="{ isHovering, props }">
             <div
               class="item"
@@ -55,7 +55,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="6">
+        <v-col cols="6" class="pa-1 pa-sm-3">
           <v-hover v-slot="{ isHovering, props }">
             <div
               class="item"
@@ -72,7 +72,7 @@
             </div>
           </v-hover>
         </v-col>
-        <v-col cols="6">
+        <v-col cols="6" class="pa-1 pa-sm-3">
           <v-hover v-slot="{ isHovering, props }">
             <div
               class="item"
@@ -101,7 +101,13 @@
   .item {
     img {
       width: 100%;
+      object-fit: cover;
     }
+  }
+}
+@media (max-width: 580px) {
+  .top-offers {
+    padding: 30px 2px;
   }
 }
 </style>

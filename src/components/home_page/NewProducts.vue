@@ -1,5 +1,5 @@
 <template>
-  <div class="new-products py-16 px-5">
+  <div class="new-products py-8 px-5">
     <v-container fluid>
       <div class="title mb-10 d-flex justify-space-between align-center">
         <h2>New Products</h2>
@@ -14,7 +14,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="7" class="pt-15">
+        <v-col cols="12" md="7">
           <swiper
             :pagination="{ el: '.swiper-pagination', clickable: true }"
             :modules="modules"
@@ -28,9 +28,10 @@
             }"
             :loop="true"
             :speed="1000"
+            :breakpoints="breakpoints"
           >
             <swiper-slide v-for="item in products" :key="item.id">
-              <v-card elevation="0" class="pb-5">
+              <v-card elevation="0" class="pb-5 text-center">
                 <v-hover v-slot="{ isHovering, props }">
                   <div style="position: relative" v-bind="props">
                     <img
@@ -83,6 +84,7 @@
                   </span>
                 </v-card-text>
                 <v-btn-toggle
+                  class="justify-center space-around"
                   v-model="shownItem[item.title]"
                   style="width: 100%"
                   mandatory
@@ -97,15 +99,19 @@
                     ><img
                       :src="pic"
                       alt=""
-                      width="35"
-                      height="35"
-                      style="border-radius: 50%; object-fit: cover"
+                      width="40"
+                      height="40"
+                      style="
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 1px solid rgb(181 181 181);
+                      "
                   /></v-btn>
                 </v-btn-toggle>
                 <div>
                   <v-btn
                     style="text-transform: none; border-radius: 30px"
-                    class="my-3 py-1 px-5"
+                    class="mt-7 py-2 px-12"
                     variant="outlined"
                     density="compact"
                     @click="
@@ -122,8 +128,13 @@
             <div class="swiper-pagination"></div>
           </swiper>
         </v-col>
-        <v-col cols="5 " style="align-self: center">
-          <img src="@/assets/images/new-products.webp" alt="" class="w-100" />
+        <v-col cols="12" sm="8" md="5" style="margin: auto">
+          <img
+            src="@/assets/images/new-products.webp"
+            alt=""
+            class="w-100"
+            style="transform: translate(15px)"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -156,6 +167,14 @@ export default {
   },
   data: () => ({
     shownItem: {},
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
+      580: {
+        slidesPerView: 2,
+      },
+    },
   }),
 };
 </script>
@@ -180,6 +199,7 @@ export default {
     border: 1px solid black;
     border-radius: 30px;
     width: fit-content;
+    overflow: hidden;
   }
   .card-title {
     font-weight: 600;

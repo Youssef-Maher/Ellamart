@@ -17,7 +17,6 @@ export const productsModule = defineStore("productsModule", {
       { title: "Fragrances", route: "fragrances" },
       { title: "Sunglasses", route: "sunglasses" },
       { title: "Sports Accessories", route: "sports-accessories" },
-      { title: "Tops", route: "tops" },
     ],
   }),
   actions: {

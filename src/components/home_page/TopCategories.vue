@@ -1,23 +1,25 @@
 <template>
   <div class="top-cat">
     <div class="cyber-banner">
-      <img src="@/assets/images/cyber-banner.webp" alt="" />
+      <img src="@/assets/images/cyber-banner.webp" width="100%" />
     </div>
-    <div class="categorise py-10">
+    <div class="categorise py-5">
       <v-container>
-        <div class="title mb-10 d-flex justify-space-between align-center">
+        <div class="title mb-5 d-flex justify-space-between align-center">
           <h2>Shop By Categories</h2>
         </div>
         <v-row>
           <v-col
-            cols="2"
+            cols="4"
+            sm="3"
+            md="2"
             v-for="categorie in categories"
             :key="categorie.title"
             elevation="0"
           >
             <v-card elevation="0" style="cursor: pointer">
               <img :src="categorie.image" alt="" />
-              <v-card-text class="card-title">{{
+              <v-card-text class="card-title pa-1 pa-sm-4">{{
                 categorie.title
               }}</v-card-text>
             </v-card>
@@ -97,24 +99,35 @@ export default {
   },
 };
 </script>
-<style>
-.top-cat .title {
-  font-size: 18px;
-  font-weight: 900;
-  color: black;
+<style lang="scss">
+.top-cat {
+  .title {
+    font-size: 18px;
+    font-weight: 900;
+    color: black;
+    a {
+      color: black;
+      font-size: 16px;
+      font-weight: normal;
+    }
+  }
+  .v-card {
+    img {
+      width: 100%;
+      border: 1px solid #d2d2d2;
+      border-radius: 50%;
+    }
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 10px;
+  }
 }
-.top-cat .title a {
-  color: black;
-  font-size: 16px;
-  font-weight: normal;
-}
-.top-cat img {
-  width: 100%;
-}
-.top-cat .card-title {
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 10px;
+@media (max-width: 580px) {
+  .top-cat .card-title {
+    font-size: 13px;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="70vw" max-height="80vh">
+  <v-dialog id="quick-dialog" v-model="dialog">
     <div class="quick-view">
       <v-container>
         <v-icon @click="dialog = false" class="close-btn"
@@ -7,21 +7,20 @@
         >
         <v-lazy>
           <v-row class="justify-center">
-            <v-col cols="6">
+            <v-col cols="12" sm="6" class="text-center">
               <v-skeleton-loader
                 v-if="loading"
                 type="image, image"
               ></v-skeleton-loader>
               <img
+                class="thumbnail"
                 v-if="!loading"
                 :src="tab[product.id] ? tab[product.id] : product.thumbnail"
-                class="w-100"
-                style="height: 350px; object-fit: cover"
               />
               <v-tabs
                 center-active
                 v-if="!loading"
-                height="150"
+                height="fit-content"
                 v-model="tab[product.id]"
               >
                 <v-tab
@@ -29,26 +28,20 @@
                   :key="index"
                   :value="img"
                 >
-                  <img
-                    :src="img"
-                    alt=""
-                    width="100"
-                    height="100"
-                    style="overflow: hidden; object-fit: cover"
-                  />
+                  <img :src="img" />
                 </v-tab>
               </v-tabs>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="12" sm="6">
               <v-skeleton-loader
                 v-if="loading"
                 type="article, article"
               ></v-skeleton-loader>
               <v-card elevation="0" v-if="!loading">
-                <v-card-title class="card-title pb-2 px-0">{{
+                <v-card-title class="card-title pa-0">{{
                   product.title
                 }}</v-card-title>
-                <div class="d-flex align-center mb-2">
+                <div class="d-flex align-center ma-0">
                   <v-rating
                     class="mr-3"
                     color="#fcca41"
@@ -90,7 +83,7 @@
                 </div>
                 <v-card-text class="info pt-5"
                   >Subtotal:
-                  <span class="text-red" style="font-size: 18px"
+                  <span style="font-size: 18px"
                     >${{ (product.price * quantity).toFixed(2) }}</span
                   >
                 </v-card-text>
@@ -159,9 +152,25 @@ export default {
 };
 </script>
 <style lang="scss">
+#quick-dialog {
+  max-width: 70vw;
+  max-height: 85vh;
+}
 .quick-view {
   background-color: white;
   border-radius: 10px;
+  overflow-y: auto;
+  .thumbnail {
+    height: 350px;
+    width: 100%;
+    object-fit: contain;
+  }
+  .v-tab {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
   .card-title {
     font-size: 22px;
     font-weight: 600;
@@ -206,5 +215,29 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+@media (max-width: 580px) {
+  #quick-dialog {
+    max-width: 100vw;
+  }
+  .quick-view {
+    .thumbnail {
+      height: 135px;
+      width: 70%;
+    }
+    .v-tab {
+      img {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
+}
+@media (max-width: 990px) {
+  #quick-dialog {
+    max-width: 90vw;
+    max-height: 95vh;
+  }
 }
 </style>

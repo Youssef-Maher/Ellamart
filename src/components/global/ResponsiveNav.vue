@@ -1,38 +1,22 @@
 <template>
-  <div class="fixed-nav">
-    <v-app-bar color="#161880" style="position: fixed">
+  <div class="res-nav">
+    <v-app-bar color="#161880" style="position: fixed" class="pa-2">
       <v-container fluid>
         <v-row>
-          <v-col cols="2">
+          <v-col cols="2" sm="4" class="d-flex align-center">
+            <v-icon @click="openMenu()">mdi-menu</v-icon>
+          </v-col>
+          <v-col cols="8" sm="4" class="text-center">
             <router-link to="/"
               ><img src="@/assets/images/logo.png" alt=""
             /></router-link>
           </v-col>
-          <v-col cols="8" class="d-flex align-center">
-            <ul class="d-flex text-white">
-              <li v-for="category in categories" :key="category.title">
-                <router-link
-                  :to="{
-                    name: 'products_category',
-                    params: { category: category.route, title: category.title },
-                  }"
-                  style="color: white; text-decoration: none"
-                  >{{ category.title }}</router-link
-                >
-              </li>
-            </ul>
-          </v-col>
           <v-col
             cols="2"
+            sm="4"
             class="d-flex justify-end align-center"
             style="gap: 30px"
           >
-            <div class="wishlist d-flex flex-column align-center">
-              <v-icon class="my-2">mdi-heart-outline</v-icon>
-            </div>
-            <div class="sign-in d-flex flex-column align-center">
-              <v-icon class="my-2">mdi-account-outline</v-icon>
-            </div>
             <div class="cart d-flex flex-column align-center" @click="openCart">
               <v-badge
                 location="right top"
@@ -50,6 +34,7 @@
     </v-app-bar>
   </div>
 </template>
+
 <script>
 import { productsModule } from "@/stores/products";
 import { mapState } from "pinia";
@@ -59,6 +44,9 @@ export default {
   methods: {
     openCart() {
       this.Emitter.emit("openCart");
+    },
+    openMenu() {
+      this.Emitter.emit("openMenu");
     },
   },
   computed: {

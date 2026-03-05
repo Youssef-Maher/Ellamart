@@ -1,9 +1,9 @@
 <template>
-  <div class="product-details mt-10">
-    <v-container fluid style="min-height: 80vh">
+  <div class="product-details pa-5">
+    <v-container fluid style="min-height: 60vh">
       <v-lazy>
         <v-row class="justify-center">
-          <v-col cols="5">
+          <v-col cols="12" sm="6" md="5" class="text-center">
             <v-skeleton-loader
               v-if="loading"
               type="image, image"
@@ -15,8 +15,7 @@
                   ? tab[singleProduct.id]
                   : singleProduct.thumbnail
               "
-              class="w-100"
-              style="height: 350px; object-fit: cover"
+              class="thumbnail"
             />
             <v-tabs
               center-active
@@ -29,17 +28,11 @@
                 :key="index"
                 :value="img"
               >
-                <img
-                  :src="img"
-                  alt=""
-                  width="100"
-                  height="100"
-                  style="overflow: hidden; object-fit: cover"
-                />
+                <img :src="img" />
               </v-tab>
             </v-tabs>
           </v-col>
-          <v-col cols="5">
+          <v-col cols="12" sm="6" md="5">
             <v-skeleton-loader
               v-if="loading"
               type="article, article"
@@ -149,6 +142,17 @@ export default {
 </script>
 <style lang="scss">
 .product-details {
+  .thumbnail {
+    height: 350px;
+    width: 100%;
+    object-fit: contain;
+  }
+  .v-tab {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
   .card-title {
     font-size: 22px;
     font-weight: 600;
@@ -193,5 +197,18 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+@media (max-width: 580px) {
+  .product-details {
+    .thumbnail {
+      height: 230px;
+    }
+    .v-tab {
+      img {
+        width: 70px;
+        height: 70px;
+      }
+    }
+  }
 }
 </style>

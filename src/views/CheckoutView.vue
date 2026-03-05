@@ -1,13 +1,13 @@
 <template>
-  <div class="checkout-page pa-10">
+  <div class="checkout-page px-1 py-3 pa-sm-10">
     <v-container>
-      <v-row>
-        <v-col cols="7">
-          <h5>
-            Home <span><v-icon>mdi-chevron-right</v-icon></span> Shopping Cart
-          </h5>
+      <h4 class="pb-6">
+        Home <span><v-icon>mdi-chevron-right</v-icon></span> Shopping Cart
+      </h4>
+      <v-row class="mobile-column-reverse">
+        <v-col cols="12" md="7">
           <div class="d-flex justify-space-between align-center ga-4 my-7">
-            <v-btn class="flex-grow-1" color="#6200ff" style="height: 45px"
+            <v-btn color="#6200ff" style="height: 45px; width: 48.5%"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="inherit"
@@ -28,7 +28,7 @@
                 ></path>
               </svg>
             </v-btn>
-            <v-btn class="flex-grow-1" color="black" style="height: 45px"
+            <v-btn color="black" style="height: 45px; width: 48.5%"
               ><svg width="41" height="17" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fill-rule="evenodd">
                   <path
@@ -56,30 +56,48 @@
             </v-btn>
           </div>
           <form @submit.prevent="submit">
-            <v-select :items="items" label="Country"></v-select>
-            <v-text-field label="Name"></v-text-field>
+            <v-select
+              :rules="requiredRule"
+              variant="outlined"
+              :items="items"
+              label="Country"
+            ></v-select>
+            <v-text-field variant="outlined" label="Name"></v-text-field>
             <div class="d-flex ga-4">
-              <v-text-field label="E-mail"></v-text-field>
-              <v-text-field label="Phone Number"></v-text-field>
+              <v-text-field variant="outlined" label="E-mail"></v-text-field>
+              <v-text-field
+                variant="outlined"
+                label="Phone Number"
+              ></v-text-field>
             </div>
-            <v-text-field label="Address"></v-text-field>
+            <v-text-field variant="outlined" label="Address"></v-text-field>
             <div class="d-flex ga-4">
-              <v-text-field label="City"></v-text-field>
-              <v-text-field label="Postal Code"></v-text-field>
+              <v-text-field variant="outlined" label="City"></v-text-field>
+              <v-text-field
+                variant="outlined"
+                label="Postal Code"
+              ></v-text-field>
             </div>
-            <v-btn
-              class="mt-6"
-              color="primary"
-              type="submit"
-              style="width: 100%"
-              @click="openSuccess()"
-            >
-              submit
-            </v-btn>
+            <div class="text-center">
+              <v-btn
+                width="120"
+                height="40px"
+                class="ma-6"
+                color="primary"
+                type="submit"
+                @click="openSuccess()"
+              >
+                submit
+              </v-btn>
+            </div>
           </form>
         </v-col>
-        <v-col cols="5">
-          <div v-for="item in cartItems" :key="item.id" class="mb-4 d-flex">
+        <v-col cols="12" md="5">
+          <div
+            v-for="item in cartItems"
+            :key="item.id"
+            class="mb-4 d-flex justify-space-between"
+          >
             <v-badge
               location="right top"
               :content="item.quantity"
@@ -89,7 +107,7 @@
               style="z-index: 9999"
             ></v-badge>
             <img class="thumbnail mr-4" :src="item.thumbnail" />
-            <div>
+            <div class="flex-grow-1">
               <h3 class="card-title pl-0 pb-1">
                 {{
                   item.title.split(" ").length <= 4
@@ -105,6 +123,12 @@
                       " ..."
                 }}
               </p>
+            </div>
+            <div
+              class="text-right"
+              style="font-weight: bold; font-size: 14px; margin: auto 0"
+            >
+              <p>{{ item.price }}</p>
             </div>
           </div>
           <div class="py-3" style="border-top: 1px solid grey">
@@ -173,11 +197,17 @@ export default {
   }
   .card-title {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
   }
   .description {
     font-size: 14px;
     color: rgb(120, 120, 120);
+  }
+}
+@media (max-width: 990px) {
+  .mobile-column-reverse {
+    display: flex;
+    flex-direction: column-reverse !important;
   }
 }
 </style>

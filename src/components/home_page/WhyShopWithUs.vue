@@ -5,7 +5,7 @@
     </div>
     <div class="items">
       <v-row>
-        <v-col cols="3" v-for="item in items" :key="item.title">
+        <v-col cols="12" sm="3" v-for="item in items" :key="item.title">
           <img :src="item.image" alt="" />
           <h3>{{ item.title }}</h3>
           <v-card-text style="padding: 7px"
@@ -46,7 +46,9 @@ export default {
 </script>
 <style lang="scss">
 .shop-withus {
-  background-image: url("@/assets/images/why-shop-with-us-banner.webp");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("@/assets/images/why-shop-with-us-banner.webp");
+  background-size: cover;
   color: white;
   text-align: center;
   .title {
@@ -62,6 +64,28 @@ export default {
     h3 {
       font-weight: 500;
       font-size: 20px;
+    }
+  }
+}
+@media (max-width: 580px) {
+  title {
+    h2 {
+      font-size: 35px;
+    }
+  }
+}
+@media (max-width: 990px) {
+  .shop-withus {
+    .items {
+      h3 {
+        font-size: 17px;
+      }
+      .v-card-text {
+        font-size: 12px;
+      }
+      a {
+        font-size: 12px;
+      }
     }
   }
 }

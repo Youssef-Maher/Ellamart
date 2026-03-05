@@ -1,14 +1,20 @@
 <template>
-  <div class="quality-features py-16">
+  <div class="quality-features py-8">
     <v-container>
-      <v-row justify="space-between">
-        <v-col v-for="feature in features" :key="feature.title" class="pa-1">
+      <v-row justify="space-between" class="five-cols-row">
+        <v-col
+          class="custom-5-col pa-md-1"
+          cols="12"
+          sm="6"
+          v-for="feature in features"
+          :key="feature.title"
+        >
           <v-card
-            class="d-flex flex-column justify-center align-center px-2 py-16 bg-white h-100 text-center ma-1"
+            class="d-flex flex-column justify-center align-center bg-white h-100 text-center pa-5 py-md-10 ma-1"
             elevation="0"
           >
             <v-icon
-              class="pb-10"
+              class="pb-sm-5"
               style="color: #7420d5; font-size: 70px"
               :icon="feature.icon"
             ></v-icon>
@@ -57,8 +63,20 @@ export default {
   },
 };
 </script>
-<style>
+<style lang="scss">
 .quality-features {
   background-color: #eee;
+}
+
+@media (min-width: 960px) {
+  .five-cols-row {
+    display: flex;
+    flex-wrap: wrap;
+
+    .custom-5-col {
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+  }
 }
 </style>

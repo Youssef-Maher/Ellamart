@@ -1,52 +1,30 @@
 <template>
   <div class="nav-bar">
-    <v-app-bar color="#161880" height="fit-content">
+    <v-app-bar color="#161880" height="fit-content" class="px-4">
       <v-container fluid>
         <v-row>
-          <v-col cols="3" class="d-flex align-center">
+          <v-col cols="3" class="d-flex align-center pa-0">
             <router-link to="/"
               ><img src="@/assets/images/logo.png" alt=""
             /></router-link>
           </v-col>
-          <v-col cols="5" class="d-flex align-center">
-            <div class="position-relative" style="width: 90%">
-              <input
-                class="py-3 px-5 bg-white"
-                style="width: 100%; border-radius: 30px; outline: none"
-                type="search"
-                name="navSearch"
-                id="navSearch"
-                placeholder="Search for Products"
-              />
-              <v-icon
-                style="
-                  position: absolute;
-                  right: 10px;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  color: black;
-                  cursor: pointer;
-                "
-                >mdi-magnify</v-icon
-              >
-            </div>
+          <v-col cols="8" class="d-flex align-center pa-0"
+            ><ul class="d-flex text-white">
+              <li v-for="category in categories" :key="category.title">
+                <router-link
+                  :to="{
+                    name: 'products_category',
+                    params: { category: category.route },
+                    query: { title: category.title },
+                  }"
+                  style="color: white; text-decoration: none"
+                  >{{ category.title }}</router-link
+                >
+              </li>
+            </ul>
           </v-col>
-          <v-col cols="4">
-            <div
-              class="parent text-white d-flex justify-space-between align-center"
-            >
-              <div class="available">
-                <span>Available 24/7 at</span><br />
-                <strong> (090) 123-4567</strong>
-              </div>
-              <div class="wishlist d-flex flex-column align-center">
-                <v-icon class="my-2">mdi-heart-outline</v-icon>
-                <span>Wishlist</span>
-              </div>
-              <div class="sign-in d-flex flex-column align-center">
-                <v-icon class="my-2">mdi-account-outline</v-icon>
-                <span>Sign-in </span>
-              </div>
+          <v-col cols="1">
+            <div class="parent text-white d-flex justify-end">
               <div
                 class="cart d-flex flex-column align-center"
                 @click="openCart"
@@ -60,51 +38,7 @@
                   style="z-index: 9999"
                 ></v-badge>
                 <v-icon class="my-2">mdi-cart-outline</v-icon>
-                <span>Cart </span>
               </div>
-            </div>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="8">
-            <ul class="d-flex text-white">
-              <li v-for="category in categories" :key="category.title">
-                <router-link
-                  :to="{
-                    name: 'products_category',
-                    params: { category: category.route, title: category.title },
-                  }"
-                  style="color: white; text-decoration: none"
-                  >{{ category.title }}</router-link
-                >
-              </li>
-            </ul>
-          </v-col>
-          <v-col cols="4" class="d-flex justify-end" style="gap: 25px">
-            <div class="help d-flex align-center">
-              <v-icon>mdi-headset</v-icon>
-              <span>Help</span>
-            </div>
-            <div id="language-btn" class="lang d-flex align-center">
-              <v-icon>mdi-web</v-icon>
-              <span class="px-1"
-                >{{ selectedLang[0].lang }} /
-                {{ selectedLang[0].currency }}</span
-              >
-              <v-icon>mdi-chevron-down</v-icon>
-              <v-menu activator="#language-btn">
-                <v-list v-model:selected="selectedLang" mandatory>
-                  <v-list-item
-                    v-for="lang in langs"
-                    :key="lang.lang"
-                    :value="lang"
-                  >
-                    <v-list-item-title
-                      >{{ lang.lang }} {{ lang.currency }}</v-list-item-title
-                    >
-                  </v-list-item>
-                </v-list>
-              </v-menu>
             </div>
           </v-col>
         </v-row>

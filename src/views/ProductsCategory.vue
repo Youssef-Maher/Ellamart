@@ -1,7 +1,7 @@
 <template v-if="categoryProducts.products">
-  <div class="products-category py-16 px-10" style="min-height: 80vh">
+  <div class="products-category py-6 px-4 px-md-10" style="min-height: 80vh">
     <div class="mb-10">
-      <h2>{{ $route.params.title }}</h2>
+      <h2 class="title">{{ $route.query.title }}</h2>
 
       <v-container>
         <v-card :loading="loading" elevation="0" class="pt-5">
@@ -12,7 +12,9 @@
           </v-row>
           <v-row v-if="!loading">
             <v-col
-              cols="3"
+              cols="12"
+              sm="4"
+              md="3"
               v-for="item in categoryProducts.products"
               :key="item.id"
             >
@@ -90,10 +92,10 @@
                         style="border-radius: 50%; object-fit: cover"
                     /></v-btn>
                   </v-btn-toggle>
-                  <div>
+                  <div class="btn-container">
                     <v-btn
                       style="text-transform: none; border-radius: 30px"
-                      class="my-3"
+                      class="product-btn mt-6"
                       variant="outlined"
                       @click="
                         $router.push({
@@ -155,9 +157,9 @@ export default {
 <style lang="scss">
 .products-category {
   .title {
-    font-size: 18px;
-    font-weight: 900;
-    color: rgb(216, 3, 3);
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
     a {
       color: black;
       font-size: 16px;
@@ -179,6 +181,17 @@ export default {
   }
   .description {
     padding: 0;
+  }
+}
+
+@media (max-width: 580px) {
+  .products-category {
+    .btn-container {
+      text-align: center;
+      .product-btn {
+        width: 70%;
+      }
+    }
   }
 }
 </style>

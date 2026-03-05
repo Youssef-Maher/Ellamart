@@ -1,17 +1,17 @@
 <template>
-  <div class="cart-drawer">
+  <div class="cart-drawer" id="cart-drawer">
     <v-navigation-drawer
-      v-model="drower"
+      v-model="drawer"
       location="right"
       temporary
-      :width="380"
       class="position-fixed"
+      :width="$vuetify.display.mobile ? 340 : 380"
     >
       <v-container>
         <div>
           <div class="d-flex justify-space-between">
             <h2>Shopping Cart</h2>
-            <v-icon @click="drower = false" class="align-self-center"
+            <v-icon @click="drawer = false" class="align-self-center"
               >mdi-close-box-outline</v-icon
             >
           </div>
@@ -49,7 +49,7 @@
         >
           <v-card
             elevation="0"
-            class="card-item pa-4"
+            class="card-item px-1 py-4 pa-md-4"
             v-for="item in cartItems"
             :key="item.id"
           >
@@ -119,12 +119,12 @@
         </div>
         <div class="d-flex justify-space-between" v-if="cartItems.length > 0">
           <v-btn
-            @click="drower = false"
+            @click="drawer = false"
             class="c-shopping-btn"
             style="font-size: 12px"
             >Continue Shopping</v-btn
           >
-          <v-btn @click="drower = false" to="/cart-page" class="cart-btn"
+          <v-btn @click="drawer = false" to="/cart-page" class="cart-btn"
             >View Cart</v-btn
           >
         </div>
@@ -133,7 +133,7 @@
             <p>Your cart is currently empty.</p>
           </div>
           <div class="d-flex justify-space-between">
-            <v-btn @click="drower = false" class="continue-btn">
+            <v-btn @click="drawer = false" class="continue-btn">
               Continue Shopping
             </v-btn>
           </div>
@@ -151,7 +151,7 @@ export default {
   inject: ["Emitter"],
   data() {
     return {
-      drower: false,
+      drawer: false,
     };
   },
   computed: {
@@ -182,7 +182,7 @@ export default {
   },
   mounted() {
     this.Emitter.on("openCart", () => {
-      this.drower = true;
+      this.drawer = true;
     });
     this.getCartItems();
   },

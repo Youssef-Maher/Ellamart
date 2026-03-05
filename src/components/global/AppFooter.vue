@@ -1,23 +1,24 @@
 <template>
   <div class="app-footer">
     <v-footer :app="true" absolute class="pa-0 d-block" color="#f4f4f4">
-      <div class="d-flex pa-5">
-        <v-container>
+      <div class="d-flex py-10 px-8">
+        <v-container class="pa-0 pa-md-4">
           <v-row>
-            <v-col cols="3">
+            <v-col class="pa-1 pa-md-4" cols="12" sm="3">
               <h3>CATEGORIES</h3>
               <v-list-item v-for="category in categories" :key="category.title">
                 <router-link
                   :to="{
                     name: 'products_category',
-                    params: { category: category.route, title: category.title },
+                    params: { category: category.route },
+                    query: { title: category.title },
                   }"
                   style="color: black; text-decoration: none"
                   >{{ category.title }}
                 </router-link>
               </v-list-item>
             </v-col>
-            <v-col cols="3">
+            <v-col class="pa-1 pa-md-4" cols="12" sm="3">
               <h3>FURTHER INFO.</h3>
               <v-list-item>About us</v-list-item>
               <v-list-item>Gift Certificates</v-list-item>
@@ -27,7 +28,7 @@
               <v-list-item>Brands</v-list-item>
               <v-list-item>Sitemap</v-list-item>
             </v-col>
-            <v-col cols="3">
+            <v-col class="pa-1 pa-md-4" cols="12" sm="3">
               <h3>CUSTOMER SERVICE</h3>
               <v-list-item>Help & FAQs</v-list-item>
               <v-list-item>Terms of Conditions</v-list-item>
@@ -37,7 +38,7 @@
               <v-list-item>Rebate Center</v-list-item>
               <v-list-item>Partners</v-list-item>
             </v-col>
-            <v-col cols="3">
+            <v-col class="pa-1 pa-md-4" cols="12" sm="3">
               <img
                 src="@/assets/images/logo-black.webp"
                 alt="logo-footer"
@@ -54,7 +55,7 @@
               </div>
               <div class="d-flex pa-2">
                 <v-icon class="pr-4">mdi-email-outline</v-icon>
-                <p>yousefmaher.dev@gmail.com</p>
+                <p style="word-break: break-all">yousefmaher.dev@gmail.com</p>
               </div>
               <div class="icons pt-4">
                 <a href="https://wa.me/201117852122" target="_blank">
@@ -124,6 +125,14 @@ export default {
       color: #010e88;
       text-decoration: none;
       font-weight: bold;
+    }
+  }
+}
+
+@media (max-width: 990px) {
+  .app-footer {
+    h3 {
+      font-size: 16px;
     }
   }
 }

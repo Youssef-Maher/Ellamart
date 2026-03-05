@@ -1,5 +1,5 @@
 <template>
-  <div class="products-swiper py-16 px-10">
+  <div class="products-swiper py-8 px-4 px-md-10">
     <div class="title mb-10 d-flex justify-space-between align-center">
       <h2 :class="`text-${titleColor}`">{{ title }}</h2>
       <a :href="link">Shop All</a>
@@ -22,17 +22,17 @@
       :space-between="35"
       class="pb-10 px-8"
       :navigation="{ prevIcon: '.swiper-prev', nextIcon: '.swiper-next' }"
+      :loop="true"
       :autoplay="{
         delay: 3000,
         pauseOnMouseEnter: true,
         disableOnInteraction: false,
       }"
-      :loop="true"
-      `
       :speed="1000"
+      :breakpoints="breakpoints"
     >
       <swiper-slide v-for="item in products" :key="item.id">
-        <v-card elevation="0" class="pb-5">
+        <v-card elevation="0" class="pb-5 text-center">
           <v-hover v-slot="{ isHovering, props }">
             <div style="position: relative" v-bind="props">
               <img
@@ -51,7 +51,7 @@
               </v-btn>
             </div>
           </v-hover>
-          <v-card-title class="card-title pl-0 pb-1"
+          <v-card-title class="card-title"
             >{{
               item.title.split(" ").length <= 3
                 ? item.title
@@ -80,6 +80,7 @@
             >
           </v-card-text>
           <v-btn-toggle
+            class="justify-center space-around"
             v-model="shownItem[item.title]"
             style="width: 100%"
             mandatory
@@ -94,16 +95,20 @@
               ><img
                 :src="pic"
                 alt=""
-                width="35"
-                height="35"
-                style="border-radius: 50%; object-fit: cover"
+                width="40"
+                height="40"
+                style="
+                  border-radius: 50%;
+                  object-fit: cover;
+                  border: 1px solid rgb(181 181 181);
+                "
             /></v-btn>
           </v-btn-toggle>
-          <div>
+          <div class="text-center">
             <v-btn
               density="compact"
               style="text-transform: none; border-radius: 30px"
-              class="my-3 py-2 px-12"
+              class="mt-7 py-2 px-12"
               variant="outlined"
               @click="
                 $router.push({
@@ -127,6 +132,22 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation, Autoplay } from "swiper";
 export default {
   inject: ["Emitter"],
+  data: () => ({
+    shownItem: {},
+    loading: false,
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
+      580: {
+        slidesPerView: 2,
+      },
+
+      990: {
+        slidesPerView: 4,
+      },
+    },
+  }),
   methods: {
     openQuickView(product) {
       this.Emitter.emit("openQuickView", product);
@@ -155,17 +176,15 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  data: () => ({
-    shownItem: {},
-    loading: false,
-  }),
 };
 </script>
 <style lang="scss">
 .products-swiper {
   .title {
-    font-size: 18px;
     font-weight: 900;
+    h2 {
+      font-size: 28px;
+    }
     a {
       color: black;
       font-size: 16px;
@@ -188,6 +207,7 @@ export default {
     border: 1px solid black;
     border-radius: 30px;
     width: fit-content;
+    overflow: hidden;
   }
 }
 .products-swiper {
